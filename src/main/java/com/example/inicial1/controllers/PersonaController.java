@@ -11,10 +11,15 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/personas")
+@CrossOrigin(origins = "*")
+@RequestMapping(path="api/v1/personas") //Estaba solo como "/personas"
 public class PersonaController {
  //  @Autowired
-//PersonaServices servicio;
+    PersonaServices personaServices;
+
+    public PersonaController(PersonaServices personaServices) {
+        this.personaServices = personaServices;
+    }
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
