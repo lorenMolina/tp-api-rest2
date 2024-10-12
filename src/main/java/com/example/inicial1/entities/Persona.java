@@ -6,6 +6,8 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.envers.Audited;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "persona")
@@ -14,12 +16,9 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString
-@Builder
+//@SuperBuilder
 @Audited
-public class Persona implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Persona extends Base {
 
     @Column(name="nombre")
     private String nombre;
@@ -33,5 +32,14 @@ public class Persona implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_domicilio")
     private Domicilio domicilio;
+
+    // Así lo hace en el video
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(
+            name = "persona_libro",
+            joinColumns = @JoinColumn(name = "persona_id"),
+            inverseJoinColumns = @JoinColumn(name = "libro_id")
+    )
+    private List<Libro> libros = new ArrayList<Libro>();
 }
 

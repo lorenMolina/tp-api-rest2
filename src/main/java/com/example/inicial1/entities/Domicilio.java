@@ -14,12 +14,9 @@ import java.util.Set;
 @Setter
 @Getter
 @ToString
-@Builder
+// @SuperBuilder
 @Audited
-public class Domicilio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Domicilio extends Base {
 
     @Column(name = "calle")
     private String calle;
@@ -27,7 +24,12 @@ public class Domicilio {
     @Column(name = "numero")
     private int numero;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @Builder.Default
-    private Set<Localidad> localidades = new HashSet<>();
+//    @OneToMany(cascade = CascadeType.PERSIST)
+//    // @Builder.Default
+//    private Set<Localidad> localidades = new HashSet<>();
+
+    // Así lo hace en el video
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "fk_localidad")
+    private Localidad localidad;
 }

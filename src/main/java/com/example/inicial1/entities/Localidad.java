@@ -13,15 +13,12 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString
-@Builder
+// @Builder
 @Table(name = "localidad")
 @Audited
-public class Localidad implements Serializable {
+public class Localidad extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(name = "denominacion")
     private String denominacion;
 
 

@@ -12,19 +12,18 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString
-@Builder
+// @SuperBuilder
 @Table(name = "autor")
 @Audited
-public class Autor implements Serializable {
+public class Autor extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(name="nombre")
     private String nombre;
 
+    @Column(name="apellido")
     private String apellido;
 
+    @Column(name="biografia", length = 1500)
     private String biografia;
 
 }
